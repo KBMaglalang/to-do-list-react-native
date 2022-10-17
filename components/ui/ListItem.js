@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: COLORS.accent,
     fontFamily: "aquire-bold",
+    paddingBottom: 8,
   },
   itemText: {
     fontSize: 16,
