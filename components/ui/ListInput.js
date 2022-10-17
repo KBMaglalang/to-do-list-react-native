@@ -52,6 +52,12 @@ export default function ListInput(props) {
     props.onCancel();
   };
 
+  const deleteHandler = () => {
+    setTitleText("");
+    setDescriptionText("");
+    props.onDeleteItem(props.data.id);
+  };
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.screen}>
@@ -92,6 +98,17 @@ export default function ListInput(props) {
             />
           </View>
         </View>
+        {props.data && (
+          <View style={styles.buttonsContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Delete"
+                color={COLORS.error}
+                onPress={deleteHandler}
+              />
+            </View>
+          </View>
+        )}
       </View>
     </Modal>
   );
