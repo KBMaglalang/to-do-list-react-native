@@ -1,7 +1,14 @@
 import { useState } from "react";
 
-import { StyleSheet, View, Text, TextInput, Button, Modal } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  Modal,
+  Alert,
+} from "react-native";
 
 //constants
 import COLORS from "../../constants/colors";
@@ -18,9 +25,24 @@ export default function ListInput(props) {
   };
 
   const addItemHandler = () => {
+    if (!titleText && !descriptionText) {
+      Alert.alert(
+        "Empty Fields!",
+        "Write something down in the title or description fields before adding to your list",
+        [{ text: "Okay", style: "destructive" }]
+      );
+      return;
+    }
+
     props.onAdd({ title: titleText, description: descriptionText });
     setTitleText("");
     setDescriptionText("");
+  };
+
+  const cancelHandler = () => {
+    setTitleText("");
+    setDescriptionText("");
+    props.onCancel();
   };
 
   return (
@@ -52,7 +74,7 @@ export default function ListInput(props) {
             <Button
               title="Cancel"
               color={COLORS.accent}
-              onPress={props.onCancel}
+              onPress={cancelHandler}
             />
           </View>
           <View style={styles.button}>
