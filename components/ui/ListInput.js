@@ -43,7 +43,11 @@ export default function ListInput(props) {
 
         <View style={styles.buttonsContainer}>
           <View style={styles.button}>
-            <Button title="Cancel" color={COLORS.accent} />
+            <Button
+              title="Cancel"
+              color={COLORS.accent}
+              onPress={props.onCancel}
+            />
           </View>
           <View style={styles.button}>
             <Button title="Add" color={COLORS.primary} />
