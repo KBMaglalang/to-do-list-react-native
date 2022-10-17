@@ -16,13 +16,10 @@ export default function ListItem(props) {
         }
       >
         <Text style={styles.itemTitle} numberOfLines={1}>
-          long title long titlelong titlelong titlelong titlelong titlelong
-          titlelong titlelong titlelong titlelong titlelong titlelong title
+          {props.title}
         </Text>
         <Text style={styles.itemText} numberOfLines={3}>
-          2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2
-          line max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line
-          max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line max
+          {props.description}
         </Text>
       </Pressable>
     </View>
@@ -33,7 +30,7 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "column",
     backgroundColor: COLORS.primary,
-    borderRadius: 6,
+    borderRadius: 4,
     margin: 8,
   },
 
