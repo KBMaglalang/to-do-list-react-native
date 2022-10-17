@@ -24,7 +24,7 @@ import ListInput from "./components/ui/ListInput";
 const tempData = () => {
   const temp = [];
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 4; i++) {
     temp.push({
       id: i,
       title: `item ${i}`,
@@ -38,6 +38,22 @@ const tempData = () => {
 export default function App() {
   // const [toDoList, setToDoList] = useState([]);
   const [toDoList, setToDoList] = useState(tempData);
+  const [listInputModalState, setListInputModalState] = useState(false);
+
+  const showCreateItemModalHandler = () => {
+    setListInputModalState(true);
+  };
+
+  const cancelItemHandler = () => {
+    setListInputModalState(false);
+  };
+
+  const addItemHandler = (itemData) => {
+    setToDoList((currentList) => [
+      ...currentList,
+      { ...itemData, id: Math.random().toString() },
+    ]);
+  };
 
   const editItemHandler = (id) => {
     console.log("in edit", id);
@@ -61,9 +77,13 @@ export default function App() {
             <Text style={styles.titleStyle}>To Do</Text>
           </View>
 
-          <ListInput />
+          <ListInput
+            visible={listInputModalState}
+            onAdd={addItemHandler}
+            onCancel={cancelItemHandler}
+          />
 
-          {/* <View style={styles.listContainer}>
+          <View style={styles.listContainer}>
             <FlatList
               alwaysBounceVertical={false}
               data={toDoList}
@@ -83,8 +103,12 @@ export default function App() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Add New Item" color={COLORS.secondary} />
-          </View> */}
+            <Button
+              title="Add New Item"
+              color={COLORS.primary}
+              onPress={showCreateItemModalHandler}
+            />
+          </View>
         </View>
       </ImageBackground>
     </>
