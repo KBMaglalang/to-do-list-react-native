@@ -10,7 +10,7 @@ export default function ListItem(props) {
         long title long titlelong titlelong titlelong titlelong titlelong
         titlelong titlelong titlelong titlelong titlelong titlelong title
       </Text>
-      <Text style={styles.itemText} numberOfLines={2}>
+      <Text style={styles.itemText} numberOfLines={3}>
         2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line
         max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2
         line max 2 line max 2 line max 2 line max 2 line max 2 line max
