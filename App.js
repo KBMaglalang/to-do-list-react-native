@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ImageBackground,
+  FlatList,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 // constants
@@ -12,23 +19,20 @@ import ListItem from "./components/ui/ListItem";
 // new item component
 // slide settings modal component
 
-const tempData = [
-  {
-    id: 1,
-    title: "item 1",
-    description: "description test 1",
-  },
-  {
-    id: 2,
-    title: "item 2",
-    description: "description test 2",
-  },
-  {
-    id: 3,
-    title: "item 3",
-    description: "description test 3",
-  },
-];
+// ! test data
+const tempData = () => {
+  const temp = [];
+
+  for (let i = 0; i < 12; i++) {
+    temp.push({
+      id: i,
+      title: `item ${i}`,
+      description: `description test ${i}`,
+    });
+  }
+
+  return temp;
+};
 
 export default function App() {
   // const [toDoList, setToDoList] = useState([]);
@@ -57,17 +61,26 @@ export default function App() {
           </View>
 
           <View style={styles.listContainer}>
-            {toDoList.map((e) => (
-              <ListItem
-                data={e}
-                onDeleteItem={deleteItemHandler}
-                onEditItem={editItemHandler}
-              />
-            ))}
+            <FlatList
+              alwaysBounceVertical={false}
+              data={toDoList}
+              renderItem={(itemData) => {
+                return (
+                  <ListItem
+                    data={itemData}
+                    onDeleteItem={deleteItemHandler}
+                    onEditItem={editItemHandler}
+                  />
+                );
+              }}
+              keyExtractor={(item) => {
+                return item.id;
+              }}
+            />
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Add New Item" color={COLORS.primary} />
+            <Button title="Add New Item" color={COLORS.secondary} />
           </View>
         </View>
       </ImageBackground>
