@@ -14,9 +14,7 @@ import { StatusBar } from "expo-status-bar";
 import COLORS from "./constants/colors";
 
 // components
-// item component
 import ListItem from "./components/ui/ListItem";
-// new item component
 import ListInput from "./components/ui/ListInput";
 // slide settings modal component
 
@@ -39,12 +37,14 @@ export default function App() {
   // const [toDoList, setToDoList] = useState([]);
   const [toDoList, setToDoList] = useState(tempData);
   const [listInputModalState, setListInputModalState] = useState(false);
+  const [editItem, setEditItem] = useState();
 
   const showItemModalHandler = () => {
     setListInputModalState(true);
   };
 
   const cancelItemHandler = () => {
+    setEditItem(undefined);
     setListInputModalState(false);
   };
 
@@ -56,15 +56,24 @@ export default function App() {
     cancelItemHandler();
   };
 
-  const editItemHandler = (id) => {
-    console.log("in edit", id);
+  const startEditItemHandler = (id) => {
+    setEditItem(...toDoList.filter((item) => item.id === id));
+    showItemModalHandler();
+  };
+
+  const editItemHandler = (itemData) => {
+    setToDoList((currentList) => [
+      ...currentList.filter((item) => item.id !== itemData.id),
+      itemData,
+    ]);
+    cancelItemHandler();
   };
 
   const deleteItemHandler = (id) => {
-    console.log("in delete", id);
     setToDoList((currentList) => {
       return currentList.filter((item) => item.id !== id);
     });
+    cancelItemHandler();
   };
 
   return (
@@ -83,9 +92,11 @@ export default function App() {
 
           <ListInput
             visible={listInputModalState}
-            onAdd={addItemHandler}
-            onCancel={cancelItemHandler}
+            data={editItem}
+            onAddItem={addItemHandler}
+            onEditItem={editItemHandler}
             onDeleteItem={deleteItemHandler}
+            onCancel={cancelItemHandler}
           />
 
           <View style={styles.listContainer}>
@@ -97,7 +108,7 @@ export default function App() {
                   <ListItem
                     data={itemData}
                     onDeleteItem={deleteItemHandler}
-                    onEditItem={editItemHandler}
+                    onEditItem={startEditItemHandler}
                   />
                 );
               }}

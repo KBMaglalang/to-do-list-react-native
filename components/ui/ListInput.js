@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   StyleSheet,
@@ -17,6 +17,13 @@ export default function ListInput(props) {
   const [titleText, setTitleText] = useState("");
   const [descriptionText, setDescriptionText] = useState("");
 
+  useEffect(() => {
+    if (props.data) {
+      setTitleText(props.data.title);
+      setDescriptionText(props.data.description);
+    }
+  }, [props.data]);
+
   const titleInputHandler = (inputText) => {
     setTitleText(inputText);
   };
@@ -34,7 +41,7 @@ export default function ListInput(props) {
       return;
     }
 
-    props.onAdd({ title: titleText, description: descriptionText });
+    props.onAddItem({ title: titleText, description: descriptionText });
     setTitleText("");
     setDescriptionText("");
   };
@@ -43,6 +50,29 @@ export default function ListInput(props) {
     setTitleText("");
     setDescriptionText("");
     props.onCancel();
+  };
+
+  const editHandler = () => {
+    if (!titleText && !descriptionText) {
+      Alert.alert(
+        "Empty Fields!",
+        "Write something down in the title or description fields before adding to your list",
+        [{ text: "Okay", style: "destructive" }]
+      );
+      return;
+    }
+
+    props.onEditItem({
+      id: props.data.id,
+      title: titleText,
+      description: descriptionText,
+    });
+  };
+
+  const deleteHandler = () => {
+    setTitleText("");
+    setDescriptionText("");
+    props.onDeleteItem(props.data.id);
   };
 
   return (
@@ -77,19 +107,26 @@ export default function ListInput(props) {
               onPress={cancelHandler}
             />
           </View>
+
           <View style={styles.button}>
             <Button
-              title="Add"
+              title={props.data ? "Edit" : "Add"}
               color={COLORS.primary}
-              onPress={addItemHandler}
+              onPress={props.data ? editHandler : addItemHandler}
             />
           </View>
         </View>
-        <View style={styles.buttonsContainer}>
-          <View style={styles.button}>
-            <Button title="Delete" color={COLORS.error} />
+        {props.data && (
+          <View style={styles.buttonsContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Delete"
+                color={COLORS.error}
+                onPress={deleteHandler}
+              />
+            </View>
           </View>
-        </View>
+        )}
       </View>
     </Modal>
   );
