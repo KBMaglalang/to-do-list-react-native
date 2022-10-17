@@ -18,26 +18,9 @@ import COLORS from "./constants/colors";
 // components
 import ListItem from "./components/ui/ListItem";
 import ListInput from "./components/ui/ListInput";
-// slide settings modal component
-
-// ! test data
-const tempData = () => {
-  const temp = [];
-
-  for (let i = 0; i < 4; i++) {
-    temp.push({
-      id: i,
-      title: `item ${i}`,
-      description: `description test ${i}`,
-    });
-  }
-
-  return temp;
-};
 
 export default function App() {
-  // const [toDoList, setToDoList] = useState([]);
-  const [toDoList, setToDoList] = useState(tempData);
+  const [toDoList, setToDoList] = useState([]);
   const [listInputModalState, setListInputModalState] = useState(false);
   const [editItem, setEditItem] = useState();
 
