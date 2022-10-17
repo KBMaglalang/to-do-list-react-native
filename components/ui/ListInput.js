@@ -52,6 +52,23 @@ export default function ListInput(props) {
     props.onCancel();
   };
 
+  const editHandler = () => {
+    if (!titleText && !descriptionText) {
+      Alert.alert(
+        "Empty Fields!",
+        "Write something down in the title or description fields before adding to your list",
+        [{ text: "Okay", style: "destructive" }]
+      );
+      return;
+    }
+
+    props.onEditItem({
+      id: props.data.id,
+      title: titleText,
+      description: descriptionText,
+    });
+  };
+
   const deleteHandler = () => {
     setTitleText("");
     setDescriptionText("");
@@ -90,11 +107,12 @@ export default function ListInput(props) {
               onPress={cancelHandler}
             />
           </View>
+
           <View style={styles.button}>
             <Button
-              title="Add"
+              title={props.data ? "Edit" : "Add"}
               color={COLORS.primary}
-              onPress={addItemHandler}
+              onPress={props.data ? editHandler : addItemHandler}
             />
           </View>
         </View>
