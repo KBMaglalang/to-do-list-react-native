@@ -2,13 +2,16 @@ import { useState } from "react";
 
 import { StyleSheet, View, Text, TextInput, Button } from "react-native";
 
+//constants
+import COLORS from "../../constants/colors";
+
 export default function ListInput() {
   const [inputText, setInputText] = useState("");
 
   return (
     <View>
-      <View>
-        <Text>Input item</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.titleStyle}>New List Item</Text>
       </View>
       <View>
         <TextInput
@@ -35,4 +38,16 @@ export default function ListInput() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  titleContainer: {
+    alignItems: "center",
+    paddingBottom: 16,
+    borderBottomWidth: 2,
+    borderColor: COLORS.accent,
+  },
+  titleStyle: {
+    fontWeight: "bold",
+    fontSize: 30,
+    color: "white",
+  },
+});
