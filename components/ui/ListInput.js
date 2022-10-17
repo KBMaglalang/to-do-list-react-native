@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { StyleSheet, View, Text, TextInput, Button } from "react-native";
+import { StyleSheet, View, Text, TextInput, Button, Modal } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 
 //constants
@@ -18,42 +18,44 @@ export default function ListInput(props) {
   };
 
   return (
-    <View style={styles.screen}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.titleStyle}>New List Item</Text>
-      </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.screen}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleStyle}>New List Item</Text>
+        </View>
 
-      <View style={styles.textContainer}>
-        <TextInput
-          style={styles.textBox}
-          placeholder="Title"
-          onChangeText={titleInputHandler}
-          value={titleText}
-        />
-      </View>
-      <View style={styles.textContainer}>
-        <TextInput
-          style={styles.textBox}
-          placeholder="Description"
-          onChangeText={descriptionInputHandler}
-          value={descriptionText}
-        />
-      </View>
+        <View style={styles.textContainer}>
+          <TextInput
+            style={styles.textBox}
+            placeholder="Title"
+            onChangeText={titleInputHandler}
+            value={titleText}
+          />
+        </View>
+        <View style={styles.textContainer}>
+          <TextInput
+            style={styles.textBox}
+            placeholder="Description"
+            onChangeText={descriptionInputHandler}
+            value={descriptionText}
+          />
+        </View>
 
-      <View style={styles.buttonsContainer}>
-        <View style={styles.button}>
-          <Button title="Cancel" color={COLORS.accent} />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.button}>
+            <Button title="Cancel" color={COLORS.accent} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Add" color={COLORS.primary} />
+          </View>
         </View>
-        <View style={styles.button}>
-          <Button title="Add" color={COLORS.primary} />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.button}>
+            <Button title="Delete" color={COLORS.error} />
+          </View>
         </View>
       </View>
-      <View style={styles.buttonsContainer}>
-        <View style={styles.button}>
-          <Button title="Delete" color={COLORS.error} />
-        </View>
-      </View>
-    </View>
+    </Modal>
   );
 }
 
