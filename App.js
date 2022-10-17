@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   StyleSheet,
@@ -19,6 +19,9 @@ import COLORS from "./constants/colors";
 import ListItem from "./components/ui/ListItem";
 import ListInput from "./components/ui/ListInput";
 
+// helper
+import { storeData, getData, clearAll } from "./helper/localStorage";
+
 export default function App() {
   const [toDoList, setToDoList] = useState([]);
   const [listInputModalState, setListInputModalState] = useState(false);
@@ -28,6 +31,18 @@ export default function App() {
     "aquire-regular": require("./assets/fonts/Aquire-BW0ox.otf"),
     "aquire-bold": require("./assets/fonts/AquireBold-8Ma60.otf"),
   });
+
+  useEffect(() => {
+    (async () => {
+      await getData().then((data) => setToDoList(data));
+    })();
+  }, [fontsLoaded]);
+
+  useEffect(() => {
+    (async () => {
+      await storeData(toDoList);
+    })();
+  }, [toDoList]);
 
   const showItemModalHandler = () => {
     setListInputModalState(true);
