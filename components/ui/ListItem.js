@@ -6,41 +6,30 @@ import COLORS from "../../constants/colors";
 export default function ListItem(props) {
   return (
     <View style={styles.card}>
-      <View style={styles.detailsContainer}>
-        <Text style={styles.itemTitle}>Title</Text>
-        <Text style={styles.itemText}>item</Text>
-      </View>
-      <View>
-        <Button title={"X"} color={COLORS.error} style={styles.deleteButton} />
-      </View>
+      <Text style={styles.itemTitle}>Title</Text>
+      <Text style={styles.itemText}>item</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: "row",
-    margin: 8,
-    borderRadius: 6,
-    backgroundColor: COLORS.primary,
-  },
-
-  detailsContainer: {
-    flex: 5,
     flexDirection: "column",
+    backgroundColor: COLORS.primary,
+    borderRadius: 6,
+    margin: 8,
     padding: 8,
   },
+
   itemTitle: {
     fontSize: 24,
     color: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.accent,
   },
   itemText: {
     fontSize: 16,
     color: "white",
-  },
-
-  deleteButton: {
-    flex: 1,
-    color: COLORS.error,
+    marginTop: 8,
   },
 });
