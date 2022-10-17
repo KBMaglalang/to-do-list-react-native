@@ -17,13 +17,14 @@ import COLORS from "./constants/colors";
 // item component
 import ListItem from "./components/ui/ListItem";
 // new item component
+import ListInput from "./components/ui/ListInput";
 // slide settings modal component
 
 // ! test data
 const tempData = () => {
   const temp = [];
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 4; i++) {
     temp.push({
       id: i,
       title: `item ${i}`,
@@ -37,6 +38,23 @@ const tempData = () => {
 export default function App() {
   // const [toDoList, setToDoList] = useState([]);
   const [toDoList, setToDoList] = useState(tempData);
+  const [listInputModalState, setListInputModalState] = useState(false);
+
+  const showItemModalHandler = () => {
+    setListInputModalState(true);
+  };
+
+  const cancelItemHandler = () => {
+    setListInputModalState(false);
+  };
+
+  const addItemHandler = (itemData) => {
+    setToDoList((currentList) => [
+      ...currentList,
+      { ...itemData, id: Math.random().toString() },
+    ]);
+    cancelItemHandler();
+  };
 
   const editItemHandler = (id) => {
     console.log("in edit", id);
@@ -44,6 +62,9 @@ export default function App() {
 
   const deleteItemHandler = (id) => {
     console.log("in delete", id);
+    setToDoList((currentList) => {
+      return currentList.filter((item) => item.id !== id);
+    });
   };
 
   return (
@@ -59,6 +80,13 @@ export default function App() {
           <View style={styles.titleContainer}>
             <Text style={styles.titleStyle}>To Do</Text>
           </View>
+
+          <ListInput
+            visible={listInputModalState}
+            onAdd={addItemHandler}
+            onCancel={cancelItemHandler}
+            onDeleteItem={deleteItemHandler}
+          />
 
           <View style={styles.listContainer}>
             <FlatList
@@ -80,7 +108,11 @@ export default function App() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button title="Add New Item" color={COLORS.secondary} />
+            <Button
+              title="Add New Item"
+              color={COLORS.primary}
+              onPress={showItemModalHandler}
+            />
           </View>
         </View>
       </ImageBackground>
@@ -120,7 +152,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontWeight: "bold",
     fontSize: 30,
-    color: "white",
+    color: COLORS.text,
     // ! add font here later on
   },
 });
