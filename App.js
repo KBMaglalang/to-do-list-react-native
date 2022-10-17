@@ -61,8 +61,12 @@ export default function App() {
     showItemModalHandler();
   };
 
-  const editItemHandler = (id) => {
-    console.log("editing item handler");
+  const editItemHandler = (itemData) => {
+    setToDoList((currentList) => [
+      ...currentList.filter((item) => item.id !== itemData.id),
+      itemData,
+    ]);
+    cancelItemHandler();
   };
 
   const deleteItemHandler = (id) => {
