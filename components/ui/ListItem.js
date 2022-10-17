@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 
 // constants
 import COLORS from "../../constants/colors";
@@ -6,15 +6,25 @@ import COLORS from "../../constants/colors";
 export default function ListItem(props) {
   return (
     <View style={styles.card}>
-      <Text style={styles.itemTitle} numberOfLines={1}>
-        long title long titlelong titlelong titlelong titlelong titlelong
-        titlelong titlelong titlelong titlelong titlelong titlelong title
-      </Text>
-      <Text style={styles.itemText} numberOfLines={3}>
-        2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line
-        max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2
-        line max 2 line max 2 line max 2 line max 2 line max 2 line max
-      </Text>
+      <Pressable
+        android_ripple={{ color: COLORS.background }}
+        onPress={() => {}}
+        style={({ pressed }) =>
+          pressed
+            ? [styles.itemContainer, styles.itemPressed]
+            : styles.itemContainer
+        }
+      >
+        <Text style={styles.itemTitle} numberOfLines={1}>
+          long title long titlelong titlelong titlelong titlelong titlelong
+          titlelong titlelong titlelong titlelong titlelong titlelong title
+        </Text>
+        <Text style={styles.itemText} numberOfLines={3}>
+          2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2
+          line max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line
+          max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line max
+        </Text>
+      </Pressable>
     </View>
   );
 }
@@ -25,7 +35,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     borderRadius: 6,
     margin: 8,
-    padding: 8,
   },
 
   itemTitle: {
@@ -38,5 +47,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "white",
     marginTop: 8,
+  },
+  itemPressed: {
+    opacity: 0.5,
+  },
+  itemContainer: {
+    padding: 8,
   },
 });
