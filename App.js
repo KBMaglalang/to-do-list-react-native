@@ -17,6 +17,7 @@ import COLORS from "./constants/colors";
 // item component
 import ListItem from "./components/ui/ListItem";
 // new item component
+import ListInput from "./components/ui/ListInput";
 // slide settings modal component
 
 // ! test data
@@ -60,7 +61,9 @@ export default function App() {
             <Text style={styles.titleStyle}>To Do</Text>
           </View>
 
-          <View style={styles.listContainer}>
+          <ListInput />
+
+          {/* <View style={styles.listContainer}>
             <FlatList
               alwaysBounceVertical={false}
               data={toDoList}
@@ -81,7 +84,7 @@ export default function App() {
 
           <View style={styles.buttonContainer}>
             <Button title="Add New Item" color={COLORS.secondary} />
-          </View>
+          </View> */}
         </View>
       </ImageBackground>
     </>
