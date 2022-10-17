@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   StyleSheet,
@@ -17,6 +17,13 @@ export default function ListInput(props) {
   const [titleText, setTitleText] = useState("");
   const [descriptionText, setDescriptionText] = useState("");
 
+  useEffect(() => {
+    if (props.data) {
+      setTitleText(props.data.title);
+      setDescriptionText(props.data.description);
+    }
+  }, [props.data]);
+
   const titleInputHandler = (inputText) => {
     setTitleText(inputText);
   };
@@ -34,7 +41,7 @@ export default function ListInput(props) {
       return;
     }
 
-    props.onAdd({ title: titleText, description: descriptionText });
+    props.onAddItem({ title: titleText, description: descriptionText });
     setTitleText("");
     setDescriptionText("");
   };
@@ -83,11 +90,6 @@ export default function ListInput(props) {
               color={COLORS.primary}
               onPress={addItemHandler}
             />
-          </View>
-        </View>
-        <View style={styles.buttonsContainer}>
-          <View style={styles.button}>
-            <Button title="Delete" color={COLORS.error} />
           </View>
         </View>
       </View>
