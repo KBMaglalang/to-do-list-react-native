@@ -79,7 +79,9 @@ export default function ListInput(props) {
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.screen}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleStyle}>New List Item</Text>
+          <Text style={styles.titleStyle}>
+            {props.data ? `Edit Item` : `New List Item`}
+          </Text>
         </View>
 
         <View style={styles.textContainer}>
