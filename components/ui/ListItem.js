@@ -39,11 +39,13 @@ const styles = StyleSheet.create({
     color: COLORS.text,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.accent,
+    fontFamily: "aquire-bold",
   },
   itemText: {
     fontSize: 16,
     color: COLORS.text,
     marginTop: 8,
+    fontFamily: "aquire-regular",
   },
   itemPressed: {
     opacity: 0.5,

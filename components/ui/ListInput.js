@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.accent,
   },
   titleStyle: {
-    fontWeight: "bold",
+    fontFamily: "aquire-bold",
     fontSize: 30,
     color: COLORS.text,
     flex: 1,
@@ -169,6 +169,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 16,
     flex: 1,
+    fontFamily: "aquire-regular",
   },
 
   buttonsContainer: {
