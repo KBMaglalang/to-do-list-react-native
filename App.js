@@ -53,6 +53,7 @@ export default function App() {
       ...currentList,
       { ...itemData, id: Math.random().toString() },
     ]);
+    cancelItemHandler();
   };
 
   const editItemHandler = (id) => {
