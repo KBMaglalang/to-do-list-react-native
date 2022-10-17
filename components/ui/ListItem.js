@@ -8,7 +8,7 @@ export default function ListItem(props) {
     <View style={styles.card}>
       <Pressable
         android_ripple={{ color: COLORS.background }}
-        onPress={() => {}}
+        onPress={props.onEditItem.bind(this, props.data.id)}
         style={({ pressed }) =>
           pressed
             ? [styles.itemContainer, styles.itemPressed]
@@ -16,10 +16,10 @@ export default function ListItem(props) {
         }
       >
         <Text style={styles.itemTitle} numberOfLines={1}>
-          {props.title}
+          {props.data.title}
         </Text>
         <Text style={styles.itemText} numberOfLines={3}>
-          {props.description}
+          {props.data.description}
         </Text>
       </Pressable>
     </View>
