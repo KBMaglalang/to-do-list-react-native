@@ -6,8 +6,15 @@ import COLORS from "../../constants/colors";
 export default function ListItem(props) {
   return (
     <View style={styles.card}>
-      <Text style={styles.itemTitle}>Title</Text>
-      <Text style={styles.itemText}>item</Text>
+      <Text style={styles.itemTitle} numberOfLines={1}>
+        long title long titlelong titlelong titlelong titlelong titlelong
+        titlelong titlelong titlelong titlelong titlelong titlelong title
+      </Text>
+      <Text style={styles.itemText} numberOfLines={2}>
+        2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line
+        max 2 line max 2 line max 2 line max 2 line max 2 line max 2 line max 2
+        line max 2 line max 2 line max 2 line max 2 line max 2 line max
+      </Text>
     </View>
   );
 }
