@@ -9,6 +9,8 @@ import {
   FlatList,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
 
 // constants
 import COLORS from "./constants/colors";
@@ -38,6 +40,11 @@ export default function App() {
   const [toDoList, setToDoList] = useState(tempData);
   const [listInputModalState, setListInputModalState] = useState(false);
   const [editItem, setEditItem] = useState();
+
+  const [fontsLoaded] = useFonts({
+    "aquire-regular": require("./assets/fonts/Aquire-BW0ox.otf"),
+    "aquire-bold": require("./assets/fonts/AquireBold-8Ma60.otf"),
+  });
 
   const showItemModalHandler = () => {
     setListInputModalState(true);
@@ -78,6 +85,10 @@ export default function App() {
     });
     cancelItemHandler();
   };
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
   return (
     <>
@@ -164,9 +175,8 @@ const styles = StyleSheet.create({
     borderColor: COLORS.accent,
   },
   titleStyle: {
-    fontWeight: "bold",
     fontSize: 30,
     color: COLORS.text,
-    // ! add font here later on
+    fontFamily: "aquire-bold",
   },
 });
