@@ -13,7 +13,7 @@ export const storeData = async (value) => {
 export const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem("MyList");
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    return jsonValue != null ? JSON.parse(jsonValue) : [];
   } catch (e) {
     // error reading value
     console.log("error reading from local storage", e);
