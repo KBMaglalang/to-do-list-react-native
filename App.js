@@ -62,9 +62,12 @@ export default function App() {
   };
 
   const editItemHandler = (itemData) => {
+    const index = toDoList.findIndex((item) => item.id === itemData.id);
+
     setToDoList((currentList) => [
-      ...currentList.filter((item) => item.id !== itemData.id),
+      ...currentList.slice(0, index),
       itemData,
+      ...currentList.slice(index + 1),
     ]);
     cancelItemHandler();
   };
