@@ -75,7 +75,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <ImageBackground
         source={require("./assets/images/background.jpg")}
         resizeMode="cover"
