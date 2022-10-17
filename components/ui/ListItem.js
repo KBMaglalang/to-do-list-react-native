@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
 
   itemTitle: {
     fontSize: 24,
-    color: "white",
+    color: COLORS.text,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.accent,
   },
   itemText: {
     fontSize: 16,
-    color: "white",
+    color: COLORS.text,
     marginTop: 8,
   },
   itemPressed: {
