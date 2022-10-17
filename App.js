@@ -40,7 +40,7 @@ export default function App() {
   const [toDoList, setToDoList] = useState(tempData);
   const [listInputModalState, setListInputModalState] = useState(false);
 
-  const showCreateItemModalHandler = () => {
+  const showItemModalHandler = () => {
     setListInputModalState(true);
   };
 
@@ -62,6 +62,9 @@ export default function App() {
 
   const deleteItemHandler = (id) => {
     console.log("in delete", id);
+    setToDoList((currentList) => {
+      return currentList.filter((item) => item.id !== id);
+    });
   };
 
   return (
@@ -82,6 +85,7 @@ export default function App() {
             visible={listInputModalState}
             onAdd={addItemHandler}
             onCancel={cancelItemHandler}
+            onDeleteItem={deleteItemHandler}
           />
 
           <View style={styles.listContainer}>
@@ -107,7 +111,7 @@ export default function App() {
             <Button
               title="Add New Item"
               color={COLORS.primary}
-              onPress={showCreateItemModalHandler}
+              onPress={showItemModalHandler}
             />
           </View>
         </View>
