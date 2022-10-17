@@ -7,7 +7,15 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import COLORS from "../../constants/colors";
 
 export default function ListInput(props) {
-  const [inputText, setInputText] = useState("");
+  const [titleText, setTitleText] = useState("");
+  const [descriptionText, setDescriptionText] = useState("");
+
+  const titleInputHandler = (inputText) => {
+    setTitleText(inputText);
+  };
+  const descriptionInputHandler = (inputText) => {
+    setDescriptionText(inputText);
+  };
 
   return (
     <View style={styles.screen}>
@@ -19,16 +27,16 @@ export default function ListInput(props) {
         <TextInput
           style={styles.textBox}
           placeholder="Title"
-          onChangeText={() => {}}
-          value={() => {}}
+          onChangeText={titleInputHandler}
+          value={titleText}
         />
       </View>
       <View style={styles.textContainer}>
         <TextInput
           style={styles.textBox}
           placeholder="Description"
-          onChangeText={() => {}}
-          value={() => {}}
+          onChangeText={descriptionInputHandler}
+          value={descriptionText}
         />
       </View>
 
