@@ -17,6 +17,12 @@ export default function ListInput(props) {
     setDescriptionText(inputText);
   };
 
+  const addItemHandler = () => {
+    props.onAdd({ title: titleText, description: descriptionText });
+    setTitleText("");
+    setDescriptionText("");
+  };
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.screen}>
@@ -50,7 +56,11 @@ export default function ListInput(props) {
             />
           </View>
           <View style={styles.button}>
-            <Button title="Add" color={COLORS.primary} />
+            <Button
+              title="Add"
+              color={COLORS.primary}
+              onPress={addItemHandler}
+            />
           </View>
         </View>
         <View style={styles.buttonsContainer}>
