@@ -3,6 +3,7 @@
     "name": "to-do-list-react-native",
     "slug": "to-do-list-react-native",
     "version": "1.0.0",
+    "owner": "kbmaglalang",
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
     "backgroundColor": "#6C756B",
