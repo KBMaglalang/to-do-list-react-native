@@ -1,6 +1,6 @@
 # To Do App
 
-A To Do List App using React Native to create applications that can run on Android, IOS, and on the WEB. This app allows the user to create multiple notes easily and quickly, as well as have it saved to your phone's local storage. Made using the EXPO framework for ease of development and testing.
+A To Do List App using React Native to create applications that can run on Android, IOS, and on the WEB. This app allows the user to create multiple notes easily and quickly, as well as have it saved to your phone's local storage. Made using the EXPO framework for ease of development and testing. Used React, HTML, CSS, JSX, and Javascript.
 
 # Dependencies
 
