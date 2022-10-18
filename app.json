@@ -4,13 +4,13 @@
     "slug": "to-do-list-react-native",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/logo.png",
     "backgroundColor": "#6C756B",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#6C756B"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

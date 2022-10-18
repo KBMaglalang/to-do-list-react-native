@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import {
   StyleSheet,
@@ -9,8 +9,8 @@ import {
   FlatList,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import AppLoading from "expo-app-loading";
-import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 
 // constants
 import COLORS from "./constants/colors";
@@ -20,29 +20,16 @@ import ListItem from "./components/ui/ListItem";
 import ListInput from "./components/ui/ListInput";
 
 // helper
-import { storeData, getData, clearAll } from "./helper/localStorage";
+import { storeData, getData } from "./helper/localStorage";
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [toDoList, setToDoList] = useState([]);
   const [listInputModalState, setListInputModalState] = useState(false);
   const [editItem, setEditItem] = useState();
-
-  const [fontsLoaded] = useFonts({
-    "aquire-regular": require("./assets/fonts/Aquire-BW0ox.otf"),
-    "aquire-bold": require("./assets/fonts/AquireBold-8Ma60.otf"),
-  });
-
-  useEffect(() => {
-    (async () => {
-      await getData().then((data) => setToDoList(data));
-    })();
-  }, [fontsLoaded]);
-
-  useEffect(() => {
-    (async () => {
-      await storeData(toDoList);
-    })();
-  }, [toDoList]);
+  const [appIsReady, setAppIsReady] = useState(false);
 
   const showItemModalHandler = () => {
     setListInputModalState(true);
@@ -84,12 +71,58 @@ export default function App() {
     cancelItemHandler();
   };
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
+  useEffect(() => {
+    (async () => {
+      await getData().then((data) => setToDoList(data));
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      await storeData(toDoList);
+    })();
+  }, [toDoList]);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Pre-load fonts, make any API calls you need to do here
+        await Font.loadAsync(
+          "aquire-regular",
+          require("./assets/fonts/Aquire-BW0ox.otf")
+        );
+        await Font.loadAsync(
+          "aquire-bold",
+          require("./assets/fonts/AquireBold-8Ma60.otf")
+        );
+      } catch (e) {
+        console.log(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
   }
 
   return (
-    <>
+    <View style={styles.rootScreen} onLayout={onLayoutRootView}>
       <StatusBar style="light" />
       <ImageBackground
         source={require("./assets/images/background.jpg")}
@@ -139,7 +172,7 @@ export default function App() {
           </View>
         </View>
       </ImageBackground>
-    </>
+    </View>
   );
 }
 
