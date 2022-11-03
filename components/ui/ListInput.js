@@ -13,6 +13,9 @@ import {
 //constants
 import COLORS from "../../constants/colors";
 
+// components
+import PrimaryButton from "./Button";
+
 export default function ListInput(props) {
   const [titleText, setTitleText] = useState("");
   const [descriptionText, setDescriptionText] = useState("");
@@ -103,29 +106,32 @@ export default function ListInput(props) {
 
         <View style={styles.buttonsContainer}>
           <View style={styles.button}>
-            <Button
-              title="Cancel"
-              color={COLORS.accent}
+            <PrimaryButton
               onPress={cancelHandler}
-            />
+              style={{ backgroundColor: COLORS.accent }}
+            >
+              Cancel
+            </PrimaryButton>
           </View>
 
           <View style={styles.button}>
-            <Button
-              title={props.data ? "Edit" : "Add"}
-              color={COLORS.primary}
+            <PrimaryButton
               onPress={props.data ? editHandler : addItemHandler}
-            />
+              style={{ backgroundColor: COLORS.primary }}
+            >
+              {props.data ? "Edit" : "Add"}
+            </PrimaryButton>
           </View>
         </View>
         {props.data && (
           <View style={styles.buttonsContainer}>
             <View style={styles.button}>
-              <Button
-                title="Delete"
-                color={COLORS.error}
+              <PrimaryButton
                 onPress={deleteHandler}
-              />
+                style={{ backgroundColor: COLORS.error }}
+              >
+                Delete
+              </PrimaryButton>
             </View>
           </View>
         )}
