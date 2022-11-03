@@ -18,6 +18,7 @@ import COLORS from "./constants/colors";
 // components
 import ListItem from "./components/ui/ListItem";
 import ListInput from "./components/ui/ListInput";
+import PrimaryButton from "./components/ui/Button";
 
 // helper
 import { storeData, getData } from "./helper/localStorage";
@@ -164,11 +165,9 @@ export default function App() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <Button
-              title="Add New Item"
-              color={COLORS.primary}
-              onPress={showItemModalHandler}
-            />
+            <PrimaryButton onPress={showItemModalHandler}>
+              Add New Item
+            </PrimaryButton>
           </View>
         </View>
       </ImageBackground>
